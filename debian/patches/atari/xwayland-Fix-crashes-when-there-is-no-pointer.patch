@@ -1,0 +1,37 @@
+From: Sjoerd Simons <sjoerd@collabora.com>
+Date: Fri, 10 Apr 2020 16:34:06 +0200
+Subject: xwayland: Fix crashes when there is no pointer
+
+When running with a weston session without a pointer device (thus with
+the wl_seat not having a pointer) xwayland pointer warping and pointer
+confining should simply be ignored to avoid crashes.
+
+Signed-off-by: Sjoerd Simons <sjoerd@collabora.com>
+---
+ hw/xwayland/xwayland-input.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/hw/xwayland/xwayland-input.c b/hw/xwayland/xwayland-input.c
+index fa46ac3..b1b612b 100644
+--- a/hw/xwayland/xwayland-input.c
++++ b/hw/xwayland/xwayland-input.c
+@@ -2759,6 +2759,9 @@ xwl_seat_can_emulate_pointer_warp(struct xwl_seat *xwl_seat)
+ {
+     struct xwl_screen *xwl_screen = xwl_seat->xwl_screen;
+ 
++    if (!xwl_seat->pointer)
++        return FALSE;
++
+     if (!xwl_screen->relative_pointer_manager)
+         return FALSE;
+ 
+@@ -2851,6 +2854,9 @@ xwl_seat_confine_pointer(struct xwl_seat *xwl_seat,
+     if (!pointer_constraints)
+         return;
+ 
++    if (!xwl_seat->wl_pointer)
++        return;
++
+     if (xwl_seat->cursor_confinement_window == xwl_window &&
+         xwl_seat->confined_pointer)
+         return;

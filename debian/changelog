@@ -1,3 +1,10 @@
+xorg-server (2:1.20.8-2vcs1) vcs; urgency=medium
+
+  * d/p/atari/xwayland-Fix-crashes-when-there-is-no-pointer.patch:
+    + Added. Fix some xwayland crashes when running without a pointer
+
+ -- Sjoerd Simons <sjoerd@collabora.com>  Fri, 10 Apr 2020 16:38:10 +0200
+
 xorg-server (2:1.20.8-2) unstable; urgency=medium
 
   * rules: Exclude udeb/ from indep dh_missing. (Closes: #955399)
