@@ -1,3 +1,9 @@
+xorg-server (2:1.20.8-2vcs2) vcs; urgency=medium
+
+  * Disable building xwayland
+
+ -- Christopher Obbard <chris.obbard@collabora.com>  Wed, 06 Oct 2021 14:26:40 +0100
+
 xorg-server (2:1.20.8-2vcs1) vcs; urgency=medium
 
   * d/p/atari/xwayland-Fix-crashes-when-there-is-no-pointer.patch:
